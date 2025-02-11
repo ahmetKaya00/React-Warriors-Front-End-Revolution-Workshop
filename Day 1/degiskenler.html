@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var name = "Ahmet";
+        var name = 123; // Tekrardan tanımlanabilir, Tekrardan değer atanabilir, değer türü değiştirilebilir.
+        console.log(name);
+
+        let age = 38;
+        age = "Ahmet";// Tekrardan tanımlanamaz, Tekrardan değer atanabilir, değer türü değiştirilebilir.
+        console.log(age);
+
+        const country = "Turkey";
+       // country = "Germany"; HATA! Tekrardan tanımlanamaz.
+        console.log(country);
+
+        let str = "123";
+        let num = Number(str);
+
+        let floatStr = "123.45";
+        let intNum = parseInt(floatStr);
+        console.log(intNum);
+
+        let numValue = 456;
+        let strValue = String(numValue);
+
+        //KAPALI TÜR DÖNÜŞÜMÜ
+
+        let result ="5" + 5;
+        console.log(result);
+
+        let subtractResult = "10" - 2;
+        console.log(subtractResult);
+
+        let boolSum = true + 5;
+        console.log(boolSum);
+
+        let boolProduct = false * 5;
+        console.log(boolProduct);
+
+
+
+    </script>
+</body>
+</html>
