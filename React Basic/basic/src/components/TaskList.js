@@ -1,27 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { TaskContext } from "../context/TaskContext";
+import alertify from "alertifyjs";
+import { Alert, Button, Input, ListGroup, ListGroupItem } from "reactstrap";
 
-function TaskList({tasks}){
-    const[TaskList, setTaskList] = useState(tasks);
+function TaskList(){
+    const {taskList, addTask} = useContext(TaskContext);
 
     const[newTask, setNewTask] = useState('');
 
+    const[error,setError] = useState('');
+
     const handleAddTask = () =>{
-        if(newTask.trim() !== ''){
-            setTaskList([...TaskList, newTask]);
-            setNewTask('');
+        if(newTask.trim() === ''){
+            setError('Görev adı boş olamaz');
+            return;
         }
+        addTask(newTask);
+        setNewTask('');
+        setError('');
+        alertify.success('Görev başarıyla eklendi!');
     }
     return(
-        <div>
-            <h1>Görev Listesi</h1>
-            <ul>
-                {TaskList.map((task, index) => (
-                    <li key={index}>{task} - <Link to={`/task/${index}`}>Detaya Git</Link></li>
+        <div className="container m-4">
+            <h1 className="mb-4">Görev Listesi</h1>
+            {taskList.length === 0 ? (
+                <Alert color="warning">Henüz bir görev eklenmedi</Alert>
+            ) : (
+            <ListGroup>
+                {taskList.map((task, index) => (
+                    <ListGroupItem className="mb-2" key={index}>{task} - <Link className="btn btn-secondary" to={`/task/${index}`}>Detaya Git</Link></ListGroupItem>
                 ))}
-            </ul>
-            <input type="text" value={newTask} onChange={(e) => setNewTask(e.target.value)} placeholder="Yeni Görev Ekle"></input>
-            <button onClick={handleAddTask}>Görev Ekle</button>
+            </ListGroup>
+            )}
+            
+            <Input className="mb-3" type="text" value={newTask} onChange={(e) => setNewTask(e.target.value)} placeholder="Yeni Görev Ekle"></Input>
+            <Button className="mb-2" onClick={handleAddTask}>Görev Ekle</Button>
+            {error && <Alert color="danger">{error}</Alert>}
         </div>
     );
 }

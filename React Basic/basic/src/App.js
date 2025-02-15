@@ -2,16 +2,18 @@ import React from "react";
 import TaskList from "./components/TaskList";
 import TaskDetail from "./components/taskDetail";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { TaskProvider } from "./context/TaskContext";
 
 function App(){
-  const tasks = ['Görev 1','Görev 2','Görev 3','Görev 4'];
   return(
+    <TaskProvider>
     <Router>
       <Routes>
-        <Route path="/" element={<TaskList tasks={tasks}/>}></Route>
-        <Route path="/task/:taskId" element={<TaskDetail tasks={tasks}/>}></Route>
+        <Route path="/" element={<TaskList/>}></Route>
+        <Route path="/task/:taskId" element={<TaskDetail/>}></Route>
       </Routes>
     </Router>
+    </TaskProvider>
   );
 }
 
